@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 
 def calc_fire_frequency(firings: [np.ndarray], speed_time: np.ndarray, speed: np.ndarray, bin_size: int) -> np.ndarray:
@@ -18,11 +18,13 @@ def calc_fire_frequency(firings: [np.ndarray], speed_time: np.ndarray, speed: np
 
 
 def pca_fire_frequency(fire_frequency: np.ndarray):
-    pca = PCA(n_components=len(fire_frequency[0]))
 
-    pca.fit(fire_frequency)
+    scaler = StandardScaler()
+    standardized_data = scaler.fit_transform(fire_frequency)
 
-    transformada = pca.transform(fire_frequency)
+    pca = PCA(n_components=len(standardized_data[0]))
+    pca.fit(standardized_data)
+    transformada = pca.transform(standardized_data)
 
     varianza_explicada = pca.explained_variance_ratio_
 

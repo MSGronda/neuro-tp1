@@ -7,7 +7,7 @@ RELAXED = '_1.edf'
 SOLVING_ARITHMATIC = '_2.edf'
 
 
-def get_signal_data(path: str, ends_with: str):
+def get_signal_data_by_electrode(path: str, ends_with: str):
     data = []
     for filename in os.listdir(path):
         if filename.endswith(ends_with):
@@ -21,5 +21,7 @@ def get_signal_data(path: str, ends_with: str):
 
             data.append(np.array(patient_data))
 
-    return data
+    data = np.array(data)
+
+    return data.transpose(1, 0, 2)  # Agrupamos por electrodo
 
