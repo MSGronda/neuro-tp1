@@ -9,17 +9,16 @@ def graph_firings(firings: [np.ndarray]):
         plt.eventplot(timestamps, lineoffsets=i + 1, linewidths=1)
 
     plt.xlabel('Tiempo (s)')
-    plt.ylabel('Disparos')
     plt.title('Trenes de Disparo vs Tiempo')
     plt.grid(True)
     plt.tight_layout()
     plt.show()
 
 
-def graph_velocity_time(velocity_time: np.ndarray):
+def graph_speed_vs_time(speed, speed_time):
     plt.figure(figsize=(10, 6))
 
-    plt.scatter(range(len(velocity_time)), velocity_time, color='blue', label='Velocidad vs Tiempo')
+    plt.scatter(speed_time, speed, color='blue', label='Velocidad vs Tiempo')
 
     plt.xlabel('Tiempo (s)')
     plt.ylabel('Velocity (???)')
