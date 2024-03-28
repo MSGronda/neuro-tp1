@@ -21,7 +21,5 @@ def get_signal_data_by_electrode(path: str, ends_with: str):
 
             data.append(np.array(patient_data))
 
-    data = np.array(data)
-
-    return data.transpose(1, 0, 2)  # Agrupamos por electrodo
+    return data
 

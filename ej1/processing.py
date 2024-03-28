@@ -31,9 +31,7 @@ def pca_fire_frequency(fire_frequency: np.ndarray):
 
     pca = PCA(n_components=len(standardized_data[0]))
     pca.fit(standardized_data)
-    components = pca.transform(standardized_data)
+    transformed = pca.transform(standardized_data)
 
-    explained_variance = pca.explained_variance_ratio_
-
-    return components, explained_variance
+    return transformed, pca.explained_variance_ratio_, pca.components_
 
