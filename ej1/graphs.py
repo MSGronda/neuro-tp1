@@ -9,6 +9,7 @@ def graph_firings(firings: [np.ndarray]):
         plt.eventplot(timestamps, lineoffsets=i + 1, linewidths=1)
 
     plt.xlabel('Tiempo (s)')
+    plt.ylabel('Disparos')
     plt.title('Trenes de Disparo vs Tiempo')
     plt.grid(True)
     plt.tight_layout()
@@ -21,7 +22,7 @@ def graph_speed_vs_time(speed, speed_time):
     plt.scatter(speed_time, speed, color='blue', label='Velocidad vs Tiempo')
 
     plt.xlabel('Tiempo (s)')
-    plt.ylabel('Velocity (???)')
+    plt.ylabel('Velocidad (m/s)')
     plt.title('Velocidad vs Tiempo')
     plt.grid(True)
     plt.legend()
@@ -29,15 +30,14 @@ def graph_speed_vs_time(speed, speed_time):
     plt.show()
 
 
-def graph_firing_frequency(firing_frequency, neuron_indices):
+def graph_firing_frequency(firing_frequency, binned_speed, neuron_index):
     plt.figure(figsize=(10, 6))
 
-    for f, i in zip(firing_frequency, neuron_indices):
-        plt.scatter(range(len(f)), f, label=f'Neuron {i}')
+    plt.scatter(binned_speed, firing_frequency, label=f'Neurona {neuron_index}')
 
-    plt.xlabel('Time bin')
-    plt.ylabel('Number of firings')
-    plt.title('Number of firings vs Time bin')
+    plt.xlabel('Velocidades agrupadas')
+    plt.ylabel('Disparos agrupados')
+    plt.title(f'Disparos agrupados vs Velocidades agrupadas (para neurona {neuron_index})')
     plt.grid(True)
     plt.legend()
     plt.tight_layout()

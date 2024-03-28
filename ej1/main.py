@@ -9,15 +9,17 @@ def ej_a(firings, speed, speed_time):
 
 
 def ej_b_c(firings, speed_time, speed):
-    firing_frequency, _ = calc_fire_frequency(firings, speed_time, speed, 1)
+    firing_frequency = bin_firings(firings, speed_time, 1)
+    binned_speed = bin_speed(speed_time, speed, 1)
 
     indices = [44, 207, 331, 643, 656, 660, 699, 779]
 
-    graph_firing_frequency([firing_frequency[i] for i in indices], indices)
+    for i in indices:
+        graph_firing_frequency(firing_frequency[i], binned_speed, i)
 
 
-def ej_d(firings, speed_time, speed):
-    firing_frequency, _ = calc_fire_frequency(firings, speed_time, speed, 1)
+def ej_d(firings, speed_time):
+    firing_frequency = bin_firings(firings, speed_time, 1)
 
     transformed, explained_variance = pca_fire_frequency(firing_frequency)
 
@@ -25,7 +27,8 @@ def ej_d(firings, speed_time, speed):
 
 
 def ej_e(firings, speed_time, speed):
-    firing_frequency, binned_speeds = calc_fire_frequency(firings, speed_time, speed, 1)
+    firing_frequency = bin_firings(firings, speed_time, 1)
+    binned_speeds = bin_speed(speed_time, speed, 1)
 
     transformed_firing_freq, explained_variance = pca_fire_frequency(firing_frequency)
 
@@ -45,9 +48,9 @@ if __name__ == '__main__':
     speed_time = data['tiempos_velocidades']
     speed = data['velocidades']
 
-    #ej_a(firings, speed, speed_time)
-    #ej_b_c(firings, speed_time, speed)
-    #ej_d(firings, speed_time, speed)
+    # ej_a(firings, speed, speed_time)
+    # ej_b_c(firings, speed_time, speed)
+    # ej_d(firings, speed_time)
     ej_e(firings, speed_time, speed)
 
 

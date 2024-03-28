@@ -3,18 +3,25 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 
-def calc_fire_frequency(firings: [np.ndarray], speed_time: np.ndarray, speed: np.ndarray, bin_size: int):
+def bin_firings(firings: [np.ndarray], speed_time: np.ndarray, bin_size: int):
     dt = np.mean(np.diff(speed_time))
 
+    speed_time_bins = speed_time[::int(bin_size / dt)]
+
+    binned_firings = np.zeros((len(firings), len(speed_time_bins) - 1))
+    for n in range(binned_firings.shape[0]):
+        binned_firings[n, :], _ = np.histogram(firings[n], bins=speed_time_bins)
+
+    return binned_firings
+
+
+def bin_speed(speed_time: np.ndarray, speed: np.ndarray, bin_size: int):
+
+    dt = np.mean(np.diff(speed_time))
     bin_tiempos_velocidades = speed_time[::int(bin_size / dt)]
-    bin_velocidades = np.array([np.mean(speed[i * int(bin_size / dt):(i + 1) * int(bin_size / dt)]) for i in
+
+    return np.array([np.mean(speed[i * int(bin_size / dt):(i + 1) * int(bin_size / dt)]) for i in
                         range(len(bin_tiempos_velocidades) - 1)])
-
-    tasa_disparo = np.zeros((len(firings), len(bin_tiempos_velocidades) - 1))
-    for n in range(tasa_disparo.shape[0]):
-        tasa_disparo[n, :], _ = np.histogram(firings[n], bins=bin_tiempos_velocidades)
-
-    return tasa_disparo, bin_velocidades
 
 
 def pca_fire_frequency(fire_frequency: np.ndarray):
@@ -24,9 +31,9 @@ def pca_fire_frequency(fire_frequency: np.ndarray):
 
     pca = PCA(n_components=len(standardized_data[0]))
     pca.fit(standardized_data)
-    transformada = pca.transform(standardized_data)
+    components = pca.transform(standardized_data)
 
-    varianza_explicada = pca.explained_variance_ratio_
+    explained_variance = pca.explained_variance_ratio_
 
-    return transformada, varianza_explicada
+    return components, explained_variance
 
