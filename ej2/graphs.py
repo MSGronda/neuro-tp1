@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def graph_pca_transformed(transformed, distances):
+def graph_euclidian(transformed, distances):
 
     if len(transformed[0]) == 2:
         fig, ax = plt.subplots()
