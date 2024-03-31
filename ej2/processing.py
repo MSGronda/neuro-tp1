@@ -7,7 +7,7 @@ def distance_from_center(points):
     if len(points[0]) == 2:
         return np.sqrt(points[:, 0] ** 2 + points[:, 1] ** 2)
     elif len(points[0]) == 3:
-        return np.sqrt(points[:, 0] ** 2 + points[:, 1] ** 2 + points[:, 1] ** 2)
+        return np.sqrt(points[:, 0] ** 2 + points[:, 1] ** 2 + points[:, 2] ** 2)
     else:
         raise ValueError("Invalido pa")
 

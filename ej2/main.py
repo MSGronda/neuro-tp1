@@ -5,14 +5,14 @@ from graphs import *
 
 def ej_1a(data):
     # PCA
-    # pca_transformed = apply_pca(data, 3)
-    # pca_distances = distance_from_center(pca_transformed)
-    # graph_euclidian(pca_transformed, pca_distances)
+    pca_transformed = apply_pca(data, 3)
+    pca_distances = distance_from_center(pca_transformed)
+    graph_euclidian(pca_transformed, pca_distances)
 
     # t-SNE
-    # tsne_transformed = apply_tsne(data, 3, 30, 200, 1000)
-    # tsne_distances = distance_from_center(tsne_transformed)
-    # graph_euclidian(tsne_transformed, tsne_distances)
+    tsne_transformed = apply_tsne(data, 3, 30, 200, 1000)
+    tsne_distances = distance_from_center(tsne_transformed)
+    graph_euclidian(tsne_transformed, tsne_distances)
 
     # ISOMAP
     isomap_transformed = apply_isomap(data, 3, 15)
