@@ -21,7 +21,7 @@ def ej_b_c(firings, speed_time, speed):
 def ej_d(firings, speed_time):
     firing_frequency = bin_firings(firings, speed_time, 1)
 
-    transformed, explained_variance = pca_fire_frequency(firing_frequency)
+    _, explained_variance, _ = pca_fire_frequency(firing_frequency)
 
     graph_cumulative_variance(explained_variance)
 
@@ -48,9 +48,9 @@ if __name__ == '__main__':
     speed_time = data['tiempos_velocidades']
     speed = data['velocidades']
 
-    # ej_a(firings, speed, speed_time)
-    # ej_b_c(firings, speed_time, speed)
-    # ej_d(firings, speed_time)
+    ej_a(firings, speed, speed_time)
+    ej_b_c(firings, speed_time, speed)
+    ej_d(firings, speed_time)
     ej_e(firings, speed_time, speed)
 
 

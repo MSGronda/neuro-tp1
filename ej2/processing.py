@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE, Isomap
+from sklearn.preprocessing import StandardScaler
 
 
 def distance_from_center(points):
@@ -17,6 +18,9 @@ def apply_pca(dataset: np.array, n_components: int):
     column_means = np.mean(dataset, axis=0)
     standardized_data = dataset - column_means
 
+    scaler = StandardScaler()
+    standardized_data = scaler.fit_transform(standardized_data)
+
     pca = PCA(n_components=n_components)
 
     transformed = pca.fit_transform(standardized_data)
@@ -26,17 +30,23 @@ def apply_pca(dataset: np.array, n_components: int):
 
 def apply_tsne(dataset: np.array, n_components: int, perplexity: int, learning_rate: int, n_iter: int):
 
+    scaler = StandardScaler()
+    standardized_data = scaler.fit_transform(dataset)
+
     tsne = TSNE(n_components=n_components, perplexity=perplexity, learning_rate=learning_rate, n_iter=n_iter)
 
-    transformed = tsne.fit_transform(dataset)
+    transformed = tsne.fit_transform(standardized_data)
 
     return transformed
 
 
 def apply_isomap(dataset: np.array, n_components: int, n_neighbors: int):
 
+    scaler = StandardScaler()
+    standardized_data = scaler.fit_transform(dataset)
+
     isomap = Isomap(n_components=n_components, n_neighbors=n_neighbors)
 
-    transformed = isomap.fit_transform(dataset)
+    transformed = isomap.fit_transform(standardized_data)
 
     return transformed
