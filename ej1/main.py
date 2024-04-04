@@ -30,13 +30,13 @@ def ej_e(firings, speed_time, speed):
     firing_frequency = bin_firings(firings, speed_time, 1)
     binned_speeds = bin_speed(speed_time, speed, 1)
 
-    _, _, components = pca_fire_frequency(firing_frequency)
+    transformed, _, _ = pca_fire_frequency(firing_frequency)
 
-    pc1 = components[0]
-    pc2 = components[1]
+    pc1 = transformed[:, 0]
+    pc2 = transformed[:, 1]
 
     graph_pcn_vs_other(pc1, [i for i in range(0, len(pc1))], "PC1", "Tiempo")
-    graph_pcn_vs_other(pc1, pc2, "PC1", "PC2")
+    graph_pcn_vs_other(pc2, pc1, "PC2", "PC1")
     graph_pcn_vs_other(pc1, binned_speeds, "PC1", "Velocidad")
 
 

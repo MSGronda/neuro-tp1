@@ -13,8 +13,11 @@ def distance_from_center(points):
         raise ValueError("Invalido pa")
 
 
-def apply_pca(dataset: np.array, n_components: int):
+def generate_timeframe(points):
+    return [i for i in range(len(points))]
 
+
+def apply_pca(dataset: np.array, n_components: int):
     column_means = np.mean(dataset, axis=0)
     standardized_data = dataset - column_means
 
@@ -29,7 +32,6 @@ def apply_pca(dataset: np.array, n_components: int):
 
 
 def apply_tsne(dataset: np.array, n_components: int, perplexity: int, learning_rate: int, n_iter: int):
-
     scaler = StandardScaler()
     standardized_data = scaler.fit_transform(dataset)
 
@@ -41,7 +43,6 @@ def apply_tsne(dataset: np.array, n_components: int, perplexity: int, learning_r
 
 
 def apply_isomap(dataset: np.array, n_components: int, n_neighbors: int):
-
     scaler = StandardScaler()
     standardized_data = scaler.fit_transform(dataset)
 

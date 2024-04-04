@@ -26,12 +26,9 @@ def bin_speed(speed_time: np.ndarray, speed: np.ndarray, bin_size: int):
 
 def pca_fire_frequency(fire_frequency: np.ndarray):
 
-    column_means = np.mean(fire_frequency, axis=0)
-    standardized_data = fire_frequency - column_means
-
-    pca = PCA(n_components=len(standardized_data[0]))
-    pca.fit(standardized_data)
-    transformed = pca.transform(standardized_data)
+    pca = PCA(n_components=len(fire_frequency.T))
+    pca.fit(fire_frequency.T)
+    transformed = pca.transform(fire_frequency.T)
 
     return transformed, pca.explained_variance_ratio_, pca.components_
 
